@@ -87,6 +87,23 @@ const data = [
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
   }
 ];
+data.push(
+  { title: 'Components I',
+    date: 'July 8th, 2020',
+    firstParagraph: 'G',
+    secondParagraph: 'I',
+    thirdParagraph: 'T'},
+    { title: 'Components II',
+    date: 'July 8th, 2020',
+    firstParagraph: 'G',
+    secondParagraph: 'O',
+    thirdParagraph: 'T'},
+    { title: 'Components III',
+    date: 'July 8th, 2020',
+    firstParagraph: 'G',
+    secondParagraph: 'U',
+    thirdParagraph: 'T'}
+    )
 
 /* Step 1: Write a component called 'articleMaker' to create an article. You want your component to return markup like the template below: 
 
@@ -97,8 +114,51 @@ const data = [
     {three separate paragraph elements}
 
     <span class='expandButton'>+</span>
-  </div>
+  </div> */
 
+const articles = document.querySelector('.articles')
+
+function articleMaker(artData){
+  const art = document.createElement('div')
+  const artTitle = document.createElement('h2')
+  const artDate = document.createElement('p')
+  const artP1 = document.createElement('p')
+  const artP2 = document.createElement('p')
+  const artP3 = document.createElement('p')
+  const artSpan = document.createElement('span')
+  const btn = document.createElement('button')
+
+  art.appendChild(artTitle)
+  art.appendChild(artDate)
+  art.appendChild(artP1)
+  art.appendChild(artP2)
+  art.appendChild(artP3)
+  art.appendChild(artSpan)
+  artSpan.appendChild(btn)
+
+  art.className = 'article'
+  artDate.className = 'date'
+  artSpan.className = 'expandButton'
+
+  artTitle.textContent = artData.title
+  artDate.textContent = artData.date
+  artP1.textContent = artData.firstParagraph
+  artP2.textContent = artData.secondParagraph
+  artP3.textContent = artData.thirdParagraph
+
+  artSpan.addEventListener('click', (it) =>{
+    art.classList.toggle('article-open')
+  })
+  return art
+
+}
+data.forEach(object =>{
+  const thisIsRealArt = articleMaker(object)
+  articles.appendChild(thisIsRealArt)
+  })
+console.log(articles)
+
+/*
   Hint: You will need to use createElement more than once here!
 
   Your function should take either an object as its one argument, or 5 separate strings mapping to each property of an article object.
